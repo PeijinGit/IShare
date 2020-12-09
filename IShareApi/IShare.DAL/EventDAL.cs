@@ -17,13 +17,13 @@ namespace IShare.DAL
             DataTable dt = sh.ExecuteTableProcedure("ShowEventByUser", new SqlParameter("id", id));
             foreach (DataRow dr in dt.Rows)
             {
-                events.Add(ToModel(dr));
+                events.Add(ToEventModel(dr));
             }
             return events;
            
         }
 
-        private Events ToModel(DataRow dr)
+        private Events ToEventModel(DataRow dr)
         {
             Events md = new Events();
             md.Id = (int)dr["Id"];
