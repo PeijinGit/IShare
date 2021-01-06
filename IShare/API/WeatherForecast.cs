@@ -1,6 +1,6 @@
 using System;
 
-namespace IShareApi
+namespace API
 {
     public class WeatherForecast
     {

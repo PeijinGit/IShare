@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IShareApi", "IShareApi\IShareApi.csproj", "{3CDBC604-382A-47A6-B52D-C48DD4A6C16D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{D587A410-A0DF-4D69-A99C-836EE696B88C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3CDBC604-382A-47A6-B52D-C48DD4A6C16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CDBC604-382A-47A6-B52D-C48DD4A6C16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CDBC604-382A-47A6-B52D-C48DD4A6C16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CDBC604-382A-47A6-B52D-C48DD4A6C16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D587A410-A0DF-4D69-A99C-836EE696B88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D587A410-A0DF-4D69-A99C-836EE696B88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D587A410-A0DF-4D69-A99C-836EE696B88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D587A410-A0DF-4D69-A99C-836EE696B88C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0A228A0F-5907-4B21-97BB-3B8BA54DAD33}
+		SolutionGuid = {D8A0E82D-F468-4EDD-A582-C995F1964EED}
 	EndGlobalSection
 EndGlobal
