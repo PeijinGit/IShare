@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Business.Models
+namespace Models
 {
     public class Event
     {

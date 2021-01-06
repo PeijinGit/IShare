@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Business.Models;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 namespace API.Controllers
 {
@@ -8,14 +8,12 @@ namespace API.Controllers
     [Route("[controller]")]
     public class EventsController : ControllerBase
     {
+        private readonly Business.Event bussiness = new Business.Event();
+
         [HttpGet]
         public IEnumerable<Event> Get()
         {
-            return new List<Event>
-            {
-                new Event{ Id = 42 , Name = "Friday Party" },
-                new Event{ Id = 99 , Name = "New Year meeting" }
-            };
+            return bussiness.ListEvents();
         }
     }
 }
