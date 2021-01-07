@@ -13,7 +13,7 @@ namespace DAL
 
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("select * from Event", connection))
+                using (var command = new SqlCommand("ListEvents", connection) { CommandType = System.Data.CommandType.StoredProcedure })
                 {
                     connection.Open();
 
@@ -21,7 +21,7 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            events.Add(new Models.Event{ Id = (int)reader["Id"], Name = (string)reader["Name"] });
+                            events.Add(new Models.Event { Id = (int)reader["Id"], Name = (string)reader["Name"] });
                         }
                     }
                 }
