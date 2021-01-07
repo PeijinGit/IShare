@@ -10,5 +10,10 @@ namespace Business
         {
             return dal.ListEvents();
         }
+
+        public IEnumerable<Models.Event> ListEventsById(int id)
+        {
+            return dal.ListEventsById( id);
+        }
     }
 }
