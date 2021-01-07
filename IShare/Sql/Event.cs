@@ -5,7 +5,7 @@ namespace DAL
 {
     public class Event
     {
-        static string connectionString = "data source=localhost\\SQLEXPRESS;Initial Catalog=master; Integrated Security = SSPI;";
+        static readonly string connectionString = "data source=localhost\\SQLEXPRESS;Initial Catalog=master; Integrated Security = SSPI;";
 
         public IEnumerable<Models.Event> ListEvents()
         {
