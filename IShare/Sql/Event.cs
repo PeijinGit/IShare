@@ -32,39 +32,9 @@ namespace DAL
             return events;
         }
 
-        //public IEnumerable<Models.Event> ListEventsById(int id)
-        //{
-        //    var events = new List<Models.Event>();
-        //    using (var connection = new SqlConnection(connectionString))
-        //    {
-        //        using (var command = new SqlCommand("ShowEventByUser", connection) { CommandType = CommandType.StoredProcedure })
-        //        {
-        //            connection.Open();
-        //            command.Parameters.Add(new SqlParameter( "@id",id));
-        //            SqlDataAdapter sd = new SqlDataAdapter(command);
-        //            DataSet ds = new DataSet();
-        //            sd.Fill(ds);
-        //            DataTable dt = ds.Tables[0];
-        //            foreach (DataRow dr in dt.Rows)
-        //            {
-        //                events.Add(ToEventModel(dr));
-        //            }
-        //        }
-        //    }
-        //    return events;
-        //}
-
-        //private Models.Event ToEventModel(DataRow dr)
-        //{
-        //    Models.Event md = new Models.Event();
-        //    md.Id = (int)dr["Id"];
-        //    md.EventName = dr["EventName"].ToString();
-        //    return md;
-        //}
         public IEnumerable<Models.Event> ListEventsById(int id)
         {
             var events = new List<Models.Event>();
-            //string sql = "SELECT * FROM Events WHERE ID";
             using (var connection = new SqlConnection(connectionString))
             {
                 using (var command = new SqlCommand("ShowEventByUser", connection) { CommandType = System.Data.CommandType.StoredProcedure })
