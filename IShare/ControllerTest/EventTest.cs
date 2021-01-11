@@ -3,27 +3,22 @@ using DAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using Moq;
+using System.Collections;
+using System.Collections.Generic;
 
-namespace ControllerTest
+namespace BusinessTest
 {
     [TestClass]
     public class EventTest
     {
-        public IFakeServiceCollection ConfigureServices()
-        {
-            IFakeServiceCollection fakeServiceCollection = new FakeServiceCollection();
-            fakeServiceCollection.AddTransient(typeof(IEventDal), typeof(DAL.Event));
-            fakeServiceCollection.AddTransient(typeof(IEventBus), typeof(Business.Event));
-            return fakeServiceCollection;
-        }
-
         [TestMethod]
-        public void TestGetAllEvents()
+        public void TestGetAllEvents() 
         {
-            IFakeServiceCollection fakeServiceCollection = ConfigureServices();
-            IEventBus _eventBus = fakeServiceCollection.GetService<IEventBus>();
-            _eventBus.ListEvents().Count();
-            int expected = 4;
+            var mock = new Mock<DAL.IEventDal>();
+            mock.Setup(foo => foo.ListEvents()).Returns(new List<Models.Event>());
+            IEventBus _eventBus = new Business.Event(mock.Object);
+            int expected = 0;
             int actual = _eventBus.ListEvents().Count();
             Assert.AreEqual(expected, actual, "Counts of events error");
         }

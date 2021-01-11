@@ -5,7 +5,6 @@ namespace Business
 {
     public class Event :IEventBus
     {
-        // private DAL.Event dal = new DAL.Event();
         private readonly IEventDal _eventDal;
         public Event(IEventDal eventDal) 
         {
@@ -21,5 +20,6 @@ namespace Business
         {
             return _eventDal.ListEventsById( id);
         }
+
     }
 }
