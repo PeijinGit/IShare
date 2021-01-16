@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using Business;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [EnableCors("any")]
     [ApiController]
     [Route("[controller]/[action]")]
-    public class EventsController : BaseController
+    public class EventsController 
     {
-        public EventsController(IEventBus eventBus) : base(eventBus) 
+        public IEventBus _eventBus;
+        public EventsController(IEventBus eventBus) 
         {
-            
+            _eventBus = eventBus;
         }
 
         [HttpGet]
