@@ -2,6 +2,9 @@
 
 namespace Business
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Event
     {
         private DAL.Event dal = new DAL.Event();
