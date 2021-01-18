@@ -29,7 +29,6 @@ namespace UnitTestProject1
             int expected = 5;
             int actual = _eventBus.ListEvents().Count();
             Assert.AreEqual(expected, actual, "Counts of events error");
-
         }
     }
 }

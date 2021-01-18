@@ -5,7 +5,6 @@ namespace Business
 {
     public class Event : IEventBLL
     {
-        //private DAL.Event dal = new DAL.Event();
         IEventDAL dal;
 
         public Event(IEventDAL eventDAL) 
