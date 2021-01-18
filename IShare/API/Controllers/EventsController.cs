@@ -1,26 +1,34 @@
 ﻿using System.Collections.Generic;
+using Business;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace API.Controllers
 {
+    [EnableCors("any")]
     [ApiController]
     [Route("[controller]/[action]")]
     public class EventsController : ControllerBase
     {
-        private readonly Business.Event bussiness = new Business.Event();
+        IEventBLL business;
 
-        [HttpGet]
-        public IEnumerable<Event> GetAllEvents()
+        public EventsController(IEventBLL eventBLL) 
         {
-            return bussiness.ListEvents();
+            business = eventBLL;
         }
 
         [HttpGet]
-        public IEnumerable<Event> ListEventsById(int id)
+        public IEnumerable<Models.Event> GetAllEvents()
+        {
+            return business.ListEvents();
+        }
+
+        [HttpGet]
+        public IEnumerable<Models.Event> ListEventsById(int id)
         {
 
-            return bussiness.ListEventsById(id);
+            return business.ListEventsById(id);
         }
 
         public string Welcome() 

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class Event
+    public class Event : IEventDAL
     {
         static readonly string connectionString = "Data Source=DESKTOP-FG071FQ;Initial Catalog=IShareData;Integrated Security=True;";
 

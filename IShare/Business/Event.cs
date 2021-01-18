@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using DAL;
+using System.Collections.Generic;
 
 namespace Business
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Event
+    public class Event : IEventBLL
     {
-        private DAL.Event dal = new DAL.Event();
+        //private DAL.Event dal = new DAL.Event();
+        IEventDAL dal;
+
+        public Event(IEventDAL eventDAL) 
+        {
+            dal = eventDAL;
+        }
 
         public IEnumerable<Models.Event> ListEvents()
         {
