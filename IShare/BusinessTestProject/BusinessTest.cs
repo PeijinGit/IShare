@@ -18,11 +18,11 @@ namespace UnitTestProject1
             mock.Setup(foo => foo.ListEvents()).Returns(new List<Models.Event>(
                 new Models.Event[]
                 {
-                    new Models.Event(1, "eve1"),
-                    new Models.Event(2, "eve2"),
-                    new Models.Event(3, "eve3"),
-                    new Models.Event(4, "eve4"),
-                    new Models.Event(5, "eve5")
+                    new Models.Event{Id=1, EventName="eve1"},
+                    new Models.Event{Id=2, EventName="eve1"},
+                    new Models.Event{Id=3, EventName="eve1"},
+                    new Models.Event{Id=4, EventName="eve1"},
+                    new Models.Event{Id=5, EventName="eve1"},
                 }
             ));
             IEventBLL _eventBus = new Business.Event(mock.Object);
