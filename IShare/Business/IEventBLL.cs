@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL
+namespace Business
 {
-    public interface IEventDAL
+    public interface IEventBLL
     {
-        IEnumerable<Models.Event> ListEventsById(int id);
         IEnumerable<Models.Event> ListEvents();
+        IEnumerable<Models.Event> ListEventsById(int id);
     }
 }
