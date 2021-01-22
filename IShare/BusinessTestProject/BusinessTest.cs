@@ -13,7 +13,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void ListEventsTest()
         {
-            IEnumerable modelList = new List<Models.Event>();
             var mock = new Mock<DAL.IEventDAL>();
             mock.Setup(foo => foo.ListEvents()).Returns(new List<Models.Event>(
                 new Models.Event[]
