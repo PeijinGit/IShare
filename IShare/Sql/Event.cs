@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class Event: IEventDal
+    public class Event : IEventDAL
     {
         static readonly string connectionString = "Data Source=DESKTOP-FG071FQ;Initial Catalog=IShareData;Integrated Security=True;";
 
@@ -28,14 +28,12 @@ namespace DAL
                     }
                 }
             }
-
             return events;
         }
 
         public IEnumerable<Models.Event> ListEventsById(int id)
         {
             var events = new List<Models.Event>();
-            //string sql = "SELECT * FROM Events WHERE ID";
             using (var connection = new SqlConnection(connectionString))
             {
                 using (var command = new SqlCommand("ShowEventByUser", connection) { CommandType = System.Data.CommandType.StoredProcedure })
