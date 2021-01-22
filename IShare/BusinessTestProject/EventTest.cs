@@ -5,10 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UnitTestProject1
+namespace BusinessTestProject
 {
     [TestClass]
-    public class BusinessTest
+    public class EventTest
     {
         [TestMethod]
         public void ListEventsTest()
