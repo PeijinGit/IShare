@@ -8,7 +8,7 @@ namespace API.Controllers
     [EnableCors("any")]
     [ApiController]
     [Route("[controller]/[action]")]
-    public class EventsController
+    public class EventsController : ControllerBase
     {
         IEventBLL business;
 

@@ -21,12 +21,11 @@ namespace API.Controllers
             this.userBLL = userBLL;
         }
 
-        //[Httppost]
-        public int ValidateLogin(string username1, string password) 
+        [HttpPost]
+        public int ValidateLogin(string username, string password) 
         {
-           string username = "Jin";
-           string pwd = "1231";
-            int userId = userBLL.ValidateLogin(username, pwd);
+           
+            int userId = userBLL.ValidateLogin(username, password);
 
             if (userId == 0) 
             {

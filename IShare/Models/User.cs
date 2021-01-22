@@ -6,10 +6,10 @@ namespace Models
 {
     public class User
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string password { get; set; }
-        public DateTime createTime { get; set; }
-        public DateTime lastLoginTime { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime LastLoginTime { get; set; }
     }
 }
