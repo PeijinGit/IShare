@@ -12,7 +12,6 @@ namespace DAL
 
         public int ValidateLogin(string username,string pwd) 
         {
-            var events = new List<Models.Event>();
             using (var connection = new SqlConnection(connectionString))
             {
                 using (var command = new SqlCommand("ValidateLogin", connection) { CommandType = System.Data.CommandType.StoredProcedure })
@@ -24,11 +23,11 @@ namespace DAL
                     {
                         if (reader == null)
                         {
-                            return 0;
+                            return -1;
                         }
                         else 
                         {
-                            int userId = 0;
+                            int userId = -1;
                             while (reader.Read()) 
                             {
                                 userId = (int)reader["Id"];

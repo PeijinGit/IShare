@@ -27,13 +27,14 @@ namespace API.Controllers
            
             int userId = userBLL.ValidateLogin(username, password);
 
-            if (userId == 0) 
+            if (userId == -1) 
             {
-                HttpContext.Response.StatusCode = 214;
-                return 0;
+                HttpContext.Response.StatusCode = 401;
+                return -1;
             }
             else 
             {
+                HttpContext.Response.StatusCode = 200;
                 return userId;
             }
         }
