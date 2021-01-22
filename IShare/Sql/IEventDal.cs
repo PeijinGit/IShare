@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DAL
 {
-    public interface IEventDAL
+    public interface IEventDal
     {
-        IEnumerable<Models.Event> ListEventsById(int id);
         IEnumerable<Models.Event> ListEvents();
+        IEnumerable<Models.Event> ListEventsById(int id);
     }
 }

@@ -3,23 +3,22 @@ using System.Collections.Generic;
 
 namespace Business
 {
-    public class Event : IEventBLL
+    public class Event :IEventBus
     {
-        IEventDAL dal;
-
-        public Event(IEventDAL eventDAL) 
+        private readonly IEventDal _eventDal;
+        public Event(IEventDal eventDal) 
         {
-            dal = eventDAL;
+            _eventDal = eventDal;
         }
 
         public IEnumerable<Models.Event> ListEvents()
         {
-            return dal.ListEvents();
+            return _eventDal.ListEvents();
         }
 
         public IEnumerable<Models.Event> ListEventsById(int id)
         {
-            return dal.ListEventsById( id);
+            return _eventDal.ListEventsById( id);
         }
 
     }
