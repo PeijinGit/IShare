@@ -1,15 +1,18 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using Utility;
 
 namespace DAL
 {
-    public class User:IUserDAL
+    public class User:BaseDAL,IUserDAL
     {
-        static readonly string connectionString = "Data Source=DESKTOP-FG071FQ;Initial Catalog=IShareData;Integrated Security=True;";
-
+        public User(IOptions<ConnectionStrings> appConfiguration) : base(appConfiguration)
+        {
+        }
         public int ValidateLogin(string username,string pwd) 
         {
             using (var connection = new SqlConnection(connectionString))

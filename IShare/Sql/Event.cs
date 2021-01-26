@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-
+using Utility;
 
 namespace DAL
 {
-    public class Event : IEventDAL
+    public class Event : BaseDAL, IEventDAL
     {
-        static readonly string connectionString = "Data Source=DESKTOP-FG071FQ;Initial Catalog=IShareData;Integrated Security=True;";
+
+        public Event(IOptions<ConnectionStrings> appConfiguration) : base(appConfiguration)
+        {
+        }
 
         public IEnumerable<Models.Event> ListEvents()
         {

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Utility;
 
 namespace API
 {
@@ -28,6 +29,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(ac => ac.AddPolicy("any", ap => ap.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            services.Configure<ConnectionStrings>(this.Configuration.GetSection("ConnectionStrings"));
             services.AddScoped(typeof(IEventDAL), typeof(DAL.Event));
             services.AddScoped(typeof(IEventBLL), typeof(Business.Event));
             services.AddScoped(typeof(IUserDAL), typeof(DAL.User));
