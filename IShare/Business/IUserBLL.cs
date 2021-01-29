@@ -7,5 +7,6 @@ namespace Business
     public interface IUserBLL
     {
          int ValidateLogin(string username, string pwd);
+        int ThirdPartyLogin(string username);
     }
 }
