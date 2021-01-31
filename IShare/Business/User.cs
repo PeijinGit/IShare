@@ -14,6 +14,11 @@ namespace Business
             this.userDal = userDal;
         }
 
+        public int ThirdPartyLogin(string username)
+        {
+            return userDal.ThirdPartyLogin(username);
+        }
+
         public int ValidateLogin(string username, string pwd) 
         {
             return userDal.ValidateLogin(username, pwd);

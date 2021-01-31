@@ -22,20 +22,35 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public int ValidateLogin(string username, string password) 
-        {
-           
-            int userId = userBLL.ValidateLogin(username, password);
+        public Models.User ValidateLogin(Models.User user) 
+        {        
+            int userId = userBLL.ValidateLogin(user.Username, user.Password);
+            return UserIdCheck(userId);
+        }
 
-            if (userId == -1) 
+        [HttpPost]
+        public Models.User ThirdPartyLogin(Models.User user) 
+        {
+            int userId = userBLL.ThirdPartyLogin(user.Username);
+            return UserIdCheck(userId);
+        }
+
+        /// <summary>
+        /// Validate user id then return user entity
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        private Models.User UserIdCheck(int userId) 
+        {
+            if (userId == -1)
             {
                 HttpContext.Response.StatusCode = 401;
-                return -1;
+                return null;
             }
-            else 
+            else
             {
                 HttpContext.Response.StatusCode = 200;
-                return userId;
+                return new Models.User { Id = userId, LastLoginTime = DateTime.Now };
             }
         }
     }

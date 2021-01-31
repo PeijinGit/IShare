@@ -7,6 +7,6 @@ namespace DAL
     public interface IUserDAL
     {
          int ValidateLogin(string username, string pwd);
-       
+        int ThirdPartyLogin(string username);
     }
 }
