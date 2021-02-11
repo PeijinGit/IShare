@@ -8,7 +8,7 @@ namespace DAL
 {
     public class User:IUserDAL
     {
-        static readonly string connectionString = "Server=tcp:isharepro.database.windows.net,1433;Initial Catalog=IShare;Persist Security Info=False;User ID=azureuser;Password=Hpjjphhpj1314151;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        static readonly string connectionString = "";
 
         public int ThirdPartyLogin(string username)
         {
