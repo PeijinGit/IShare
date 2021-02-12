@@ -8,7 +8,7 @@ namespace DAL
 {
     public class User:IUserDAL
     {
-        static readonly string connectionString = "Server=tcp:ishareappserver.database.windows.net,1433;Initial Catalog=iShareData;Persist Security Info=False;User ID=ishareAdmin;Password=Hpjjphhpj1314151;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        static readonly string connectionString = "";
 
         public int ThirdPartyLogin(string username)
         {
@@ -32,6 +32,36 @@ namespace DAL
                                 userId = (int)reader["Id"];
                             }
                             return userId;
+                        }
+                    }
+                }
+            }
+        }
+
+        public int UserRegister(string username, string password, int usertype)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("UserRegister", connection) { CommandType = System.Data.CommandType.StoredProcedure })
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@username", username));
+                    command.Parameters.Add(new SqlParameter("@pwd", password));
+                    command.Parameters.Add(new SqlParameter("@atype", usertype));
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader == null)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            int counter = 0;
+                            while (reader.Read())
+                            {
+                                counter++;
+                            }
+                            return counter;
                         }
                     }
                 }
