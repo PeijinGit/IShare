@@ -8,9 +8,4 @@ namespace Models
     {
         public string ConStr { get; set; }
     }
-
-   /* public class DBconnection 
-    {
-        public string ConStr { get; set; }
-    }*/
 }

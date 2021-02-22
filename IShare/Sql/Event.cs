@@ -9,8 +9,6 @@ namespace DAL
 {
     public class Event : IEventDAL
     {
-        //static readonly string connectionString = "Data Source=42.192.76.32;Initial Catalog=IShareData;User ID=SA;Password=Hpjjphhpj1314151*";
-
         private readonly IOptions<AppSettingModels> _appSettings;
         public static string connectionString;
 
