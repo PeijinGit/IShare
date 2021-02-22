@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -8,7 +10,14 @@ namespace DAL
 {
     public class User:IUserDAL
     {
-        static readonly string connectionString = "";
+        private readonly IOptions<AppSettingModels> _appSettings;
+        private string connectionString;
+
+        public User(IOptions<AppSettingModels> appSettings)
+        {
+            _appSettings = appSettings;
+            connectionString = _appSettings.Value.ConStr;
+        }
 
         public int ThirdPartyLogin(string username)
         {

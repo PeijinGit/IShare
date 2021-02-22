@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
+using Models;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -7,7 +9,16 @@ namespace DAL
 {
     public class Event : IEventDAL
     {
-        static readonly string connectionString = "";
+        //static readonly string connectionString = "Data Source=42.192.76.32;Initial Catalog=IShareData;User ID=SA;Password=Hpjjphhpj1314151*";
+
+        private readonly IOptions<AppSettingModels> _appSettings;
+        private string connectionString;
+
+        public Event(IOptions<AppSettingModels> appSettings) 
+        {
+            _appSettings = appSettings;
+            connectionString = _appSettings.Value.ConStr;
+        }
 
         public IEnumerable<Models.Event> ListEvents()
         {
