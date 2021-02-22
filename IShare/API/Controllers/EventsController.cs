@@ -32,7 +32,8 @@ namespace API.Controllers
 
         public string Welcome() 
         {
-            return "Program start Welcome!";
+            
+            return "Program start Welcome! "+ DAL.Event.connectionString;
         }
     }
 }
