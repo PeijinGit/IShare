@@ -23,6 +23,7 @@ namespace API.Controllers
             this.userBLL = userBLL;
         }
 
+
         [HttpPost]
         public Models.LoginResponse ValidateLogin(Models.User user) 
         {        
@@ -30,6 +31,11 @@ namespace API.Controllers
             return UserIdCheck(userId);
         }
 
+        /// <summary>
+        /// Google and Facebook loigin
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
         public Models.LoginResponse ThirdPartyLogin(Models.User user) 
         {
