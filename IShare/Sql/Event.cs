@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
+using Models;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 
 namespace DAL
 {
-    public class Event : IEventDAL
+    public class Event : BaseDAL, IEventDAL
     {
-        static readonly string connectionString = "";
+
+        public Event(IOptions<AppSettingModels> appSettings) : base(appSettings)
+        {
+        }
 
         public IEnumerable<Models.Event> ListEvents()
         {
