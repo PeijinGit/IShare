@@ -8,15 +8,11 @@ using System.Text;
 
 namespace DAL
 {
-    public class User:IUserDAL
+    public class User:BaseDAL, IUserDAL
     {
-        private readonly IOptions<AppSettingModels> _appSettings;
-        private string connectionString;
 
-        public User(IOptions<AppSettingModels> appSettings)
+        public User(IOptions<AppSettingModels> appSettings) : base(appSettings)
         {
-            _appSettings = appSettings;
-            connectionString = _appSettings.Value.ConStr;
         }
 
         public int ThirdPartyLogin(string username)

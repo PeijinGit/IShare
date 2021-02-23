@@ -7,15 +7,11 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class Event : IEventDAL
+    public class Event : BaseDAL, IEventDAL
     {
-        private readonly IOptions<AppSettingModels> _appSettings;
-        public static string connectionString;
 
-        public Event(IOptions<AppSettingModels> appSettings) 
+        public Event(IOptions<AppSettingModels> appSettings) : base(appSettings)
         {
-            _appSettings = appSettings;
-            connectionString = _appSettings.Value.ConStr;
         }
 
         public IEnumerable<Models.Event> ListEvents()
