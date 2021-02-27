@@ -14,6 +14,33 @@ namespace DAL
         {
         }
 
+        public Models.Event AddEvent(int creatorId, string eventName)
+        {
+            var events = new List<Models.Event>();
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("AddEvents", connection) { CommandType = System.Data.CommandType.StoredProcedure })
+                {
+                    connection.Open();
+                    string id = System.Guid.NewGuid().ToString("N");
+                    command.Parameters.Add(new SqlParameter("@creatorId", creatorId));
+                    command.Parameters.Add(new SqlParameter("@eventName", eventName));
+                    command.Parameters.Add(new SqlParameter("@id", id));
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader == null)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return new Models.Event {Id = id,EventName = eventName };
+                        }
+                    }
+                }
+            }
+        }
+
         public IEnumerable<Models.Event> ListEvents()
         {
             var events = new List<Models.Event>();
@@ -28,7 +55,7 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            events.Add(new Models.Event { Id = (int)reader["Id"], EventName = (string)reader["EventName"] });
+                            events.Add(new Models.Event { Id = (string)reader["Id"], EventName = (string)reader["EventName"] });
                         }
                     }
                 }
@@ -49,7 +76,7 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            events.Add(new Models.Event { Id = (int)reader["Id"], EventName = (string)reader["EventName"] });
+                            events.Add(new Models.Event { Id = (string)reader["Id"], EventName = (string)reader["EventName"] });
                         }
                     }
                 }

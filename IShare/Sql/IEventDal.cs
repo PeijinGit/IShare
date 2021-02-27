@@ -8,5 +8,7 @@ namespace DAL
     {
         IEnumerable<Models.Event> ListEventsById(int id);
         IEnumerable<Models.Event> ListEvents();
+
+        Models.Event AddEvent(int creatorId, string eventName);
     }
 }

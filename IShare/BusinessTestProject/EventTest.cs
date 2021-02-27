@@ -17,11 +17,11 @@ namespace BusinessTestProject
             mock.Setup(foo => foo.ListEvents()).Returns(new List<Models.Event>(
                 new Models.Event[]
                 {
-                    new Models.Event{Id=1, EventName="eve1"},
-                    new Models.Event{Id=2, EventName="eve1"},
-                    new Models.Event{Id=3, EventName="eve1"},
-                    new Models.Event{Id=4, EventName="eve1"},
-                    new Models.Event{Id=5, EventName="eve1"},
+                    new Models.Event{Id="1", EventName="eve1"},
+                    new Models.Event{Id="2", EventName="eve1"},
+                    new Models.Event{Id="3", EventName="eve1"},
+                    new Models.Event{Id="4", EventName="eve1"},
+                    new Models.Event{Id="5", EventName="eve1"},
                 }
             ));
             IEventBLL _eventBus = new Business.Event(mock.Object);

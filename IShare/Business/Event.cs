@@ -22,5 +22,9 @@ namespace Business
             return dal.ListEventsById( id);
         }
 
+        public Models.Event AddEvent(Models.Event newEvent) 
+        {
+            return dal.AddEvent(newEvent.UserId,newEvent.EventName);
+        }
     }
 }
