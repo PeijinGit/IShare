@@ -8,5 +8,6 @@ namespace Business
     {
         IEnumerable<Models.Event> ListEvents();
         IEnumerable<Models.Event> ListEventsById(int id);
+        Models.Event AddEvent(Models.Event newEvent);
     }
 }
