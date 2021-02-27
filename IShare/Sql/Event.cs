@@ -14,6 +14,13 @@ namespace DAL
         {
         }
 
+        /// <summary>
+        /// Add event function
+        /// Insert single event with eventId CreatorId and eventName 
+        /// </summary>
+        /// <param name="creatorId"></param>
+        /// <param name="eventName"></param>
+        /// <returns></returns>
         public Models.Event AddEvent(int creatorId, string eventName)
         {
             var events = new List<Models.Event>();
