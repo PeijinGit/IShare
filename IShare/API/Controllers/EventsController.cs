@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using API.Filters;
 using Business;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(ISActionFitler))]
         public IEnumerable<Models.Event> ListEventsById(int id)
         {
 
@@ -31,9 +33,30 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(ISActionFitler))]
         public Models.ResResult<Models.Event> AddEvent(Models.Event newEvent)
         {
-            Models.Event resutEvent = business.AddEvent(newEvent);
+            Models.Event resultEvent = business.AddEvent(newEvent);
+            if (resultEvent == null)
+            {
+                return new Models.ResResult<Models.Event> { Status = -1, Msg = "Add Fail" };
+            }
+            else
+            {
+                Models.ResResult<Models.Event> resResult = new Models.ResResult<Models.Event>();
+                resResult.Status = 1;
+                resResult.ResultData = new List<Models.Event>() { resultEvent };
+                resResult.Msg = "Add Success";
+
+                return resResult;
+            }
+        }
+
+        [HttpPost]
+        [TypeFilter(typeof(ISActionFitler))]
+        public Models.ResResult<Models.Event> UpdateEvent(Models.Event newEvent)
+        {
+            Models.Event resutEvent = business.UpdateEvent(newEvent);
             if (resutEvent == null)
             {
                 return new Models.ResResult<Models.Event> { Status = -1, Msg = "Add Fail" };
@@ -48,6 +71,7 @@ namespace API.Controllers
                 return resResult;
             }
         }
+
 
         public string Welcome() 
         {
