@@ -5,6 +5,11 @@ namespace Utility
 {
     public static class TokenHelper
     {
+        /// <summary>
+        /// Create token, used by the time user login
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static string CreateToken(int userId)
         {
             DateTime dateTimeExp = DateTime.Now.AddMinutes(60);
@@ -12,6 +17,28 @@ namespace Utility
             var tokenOrg = JsonConvert.SerializeObject(tokenData);
             string token = tokenOrg.DESEncryption();
             return token;
+        }
+
+        /// <summary>
+        /// Unlock Token function used by actionFilter
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static (int userId, bool isExp) UnlockToken(string token)
+        {
+            string tokenDec = token.DESDecrypt();
+            if (tokenDec != null)
+            {
+                dynamic tokenData = JsonConvert.DeserializeObject<dynamic>(tokenDec);
+                var dateTimeExp = (DateTime)tokenData.dateTimeExp;
+                bool isExp = false;
+                if (dateTimeExp < DateTime.Now)
+                {
+                    isExp = true;
+                }
+                return ((int)tokenData.userId, isExp);
+            }
+            return (0, true);
         }
 
 
@@ -41,7 +68,7 @@ namespace Utility
             catch { return "error"; }
         }
 
-        public static string DESDecrypt(string Text, string sKey = null)
+        public static string DESDecrypt(this string Text, string sKey = null)
         {
             sKey = sKey ?? "ishare";
             try

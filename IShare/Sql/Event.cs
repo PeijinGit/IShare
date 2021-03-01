@@ -48,6 +48,38 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// Update event function
+        /// Update event with eventId and new eventName 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="eventName"></param>
+        /// <returns></returns>
+        public Models.Event UpdateEvent(string id, string eventName)
+        {
+            var events = new List<Models.Event>();
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("UpdateEvent", connection) { CommandType = System.Data.CommandType.StoredProcedure })
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@eventName", eventName));
+                    command.Parameters.Add(new SqlParameter("@id", id));
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader == null)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return new Models.Event { Id = id, EventName = eventName };
+                        }
+                    }
+                }
+            }
+        }
+
         public IEnumerable<Models.Event> ListEvents()
         {
             var events = new List<Models.Event>();
