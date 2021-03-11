@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -94,7 +95,7 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            events.Add(new Models.Event { Id = (string)reader["Id"], EventName = (string)reader["EventName"] });
+                            events.Add(new Models.Event { Id = (string)reader["Id"], EventName = (string)reader["EventName"],UserId = (int)reader["CreatorId"] });
                         }
                     }
                 }
@@ -121,6 +122,72 @@ namespace DAL
                 }
             }
             return events;
+        }
+
+        /// <summary>
+        /// A temp function for listing all the acticities
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Models.Activities> ListActivities()
+        {
+            var activites = new List<Models.Activities>();
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("SELECT * FROM Activities", connection) { CommandType = System.Data.CommandType.Text })
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            activites.Add(new Models.Activities { Id = (string)reader["Id"], AcName = (string)reader["Name"], 
+                                StartDate= (DateTime)reader["StartTime"], EndDate =(DateTime)reader["EndTime"], EventId = (string)reader["EventId"]
+                            });
+                        }
+                    }
+                }
+            }
+            return activites;
+        }
+
+        public int AddActivity(int i)
+        {
+            var events = new List<Models.Event>();
+            string name = "";
+            DateTime start = DateTime.Now;
+            string eventId = "";
+            int count = 0;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("AddActivities", connection) { CommandType = System.Data.CommandType.StoredProcedure })
+                {
+                    connection.Open();
+                        DateTime end = start.AddDays(15+i);
+                        name = "AC"+ i;
+                        eventId = i+"";
+                        string id = System.Guid.NewGuid().ToString("N");
+                        command.Parameters.Add(new SqlParameter("@id", id));
+                        command.Parameters.Add(new SqlParameter("@name", name));
+                        command.Parameters.Add(new SqlParameter("@startDate", start));
+                        command.Parameters.Add(new SqlParameter("@endDate", end));
+                        command.Parameters.Add(new SqlParameter("@eventId", eventId));
+                        using (var reader = command.ExecuteReader())
+                        {
+                            
+                            while (reader.Read())
+                            {
+                                count = (int)reader["RowNum"];
+                            }
+                        }
+                    
+                }
+            }
+            return count;
+        }
+
+        public int AddActivity()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,5 +10,7 @@ namespace DAL
         IEnumerable<Models.Event> ListEvents();
         Models.Event AddEvent(int creatorId, string eventName);
         Models.Event UpdateEvent(string id, string eventName);
+        IEnumerable<Models.Activities> ListActivities();
+        int AddActivity();
     }
 }

@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [TypeFilter(typeof(ISActionFitler))]
+        //[TypeFilter(typeof(ISActionFitler))]
         public IEnumerable<Models.Event> ListEventsById(int id)
         {
 
@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [TypeFilter(typeof(ISActionFitler))]
+        //[TypeFilter(typeof(ISActionFitler))]
         public Models.ResResult<Models.Event> AddEvent(Models.Event newEvent)
         {
             Models.Event resultEvent = business.AddEvent(newEvent);
@@ -53,9 +53,9 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [TypeFilter(typeof(ISActionFitler))]
+        //[TypeFilter(typeof(ISActionFitler))]
         public Models.ResResult<Models.Event> UpdateEvent(Models.Event newEvent)
-        {
+         {
             Models.Event resutEvent = business.UpdateEvent(newEvent);
             if (resutEvent == null)
             {
@@ -70,6 +70,16 @@ namespace API.Controllers
 
                 return resResult;
             }
+        }
+
+        /// <summary>
+        /// Temp function
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public Models.ResResult<Models.Activities> GetAllAc()
+        {
+            return business.ListActivities();
         }
 
 
