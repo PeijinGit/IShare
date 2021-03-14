@@ -42,7 +42,7 @@ namespace DAL
                         }
                         else
                         {
-                            return new Models.Event {Id = id,EventName = eventName };
+                            return new Models.Event { Id = id, EventName = eventName };
                         }
                     }
                 }
@@ -81,6 +81,10 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// List All Events
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Models.Event> ListEvents()
         {
             var events = new List<Models.Event>();
@@ -95,7 +99,7 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            events.Add(new Models.Event { Id = (string)reader["Id"], EventName = (string)reader["EventName"],UserId = (int)reader["CreatorId"] });
+                            events.Add(new Models.Event { Id = (string)reader["Id"], EventName = (string)reader["EventName"], UserId = (int)reader["CreatorId"] });
                         }
                     }
                 }
@@ -103,6 +107,11 @@ namespace DAL
             return events;
         }
 
+        /// <summary>
+        /// list by user id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Models.Event> ListEventsById(int id)
         {
             var events = new List<Models.Event>();
@@ -140,8 +149,19 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            activites.Add(new Models.Activities { Id = (string)reader["Id"], AcName = (string)reader["Name"], 
-                                StartDate= (DateTime)reader["StartTime"], EndDate =(DateTime)reader["EndTime"], EventId = (string)reader["EventId"]
+                            activites.Add(new Models.Activities
+                            {
+                                Id = (string)reader["Id"],
+                                AcName = (string)reader["Name"],
+                                EsFee = (int)reader["EsFee"],
+                                Descript = (string)reader["Descript"],
+                                StartDate = (DateTime)reader["StartTime"],
+                                EndDate = (DateTime)reader["EndTime"],
+                                EventId = (string)reader["EventId"],
+                                AcStatus = (byte)reader["Status"],
+                                Img = (string)reader["Imgs"],
+                                Detail = (string)reader["Detail"],
+                                Vision = (byte)reader["Vision"],
                             });
                         }
                     }
@@ -152,7 +172,6 @@ namespace DAL
 
         public int AddActivity(int i)
         {
-            var events = new List<Models.Event>();
             string name = "";
             DateTime start = DateTime.Now;
             string eventId = "";
@@ -162,32 +181,70 @@ namespace DAL
                 using (var command = new SqlCommand("AddActivities", connection) { CommandType = System.Data.CommandType.StoredProcedure })
                 {
                     connection.Open();
-                        DateTime end = start.AddDays(15+i);
-                        name = "AC"+ i;
-                        eventId = i+"";
-                        string id = System.Guid.NewGuid().ToString("N");
-                        command.Parameters.Add(new SqlParameter("@id", id));
-                        command.Parameters.Add(new SqlParameter("@name", name));
-                        command.Parameters.Add(new SqlParameter("@startDate", start));
-                        command.Parameters.Add(new SqlParameter("@endDate", end));
-                        command.Parameters.Add(new SqlParameter("@eventId", eventId));
-                        using (var reader = command.ExecuteReader())
+                    DateTime end = start.AddDays(15 + i);
+                    name = "AC" + i;
+                    eventId = i + "";
+                    string id = System.Guid.NewGuid().ToString("N");
+                    command.Parameters.Add(new SqlParameter("@id", id));
+                    command.Parameters.Add(new SqlParameter("@name", name));
+                    command.Parameters.Add(new SqlParameter("@startDate", start));
+                    command.Parameters.Add(new SqlParameter("@endDate", end));
+                    command.Parameters.Add(new SqlParameter("@eventId", eventId));
+                    using (var reader = command.ExecuteReader())
+                    {
+
+                        while (reader.Read())
                         {
-                            
-                            while (reader.Read())
-                            {
-                                count = (int)reader["RowNum"];
-                            }
+                            count = (int)reader["RowNum"];
                         }
-                    
+                    }
+
                 }
             }
             return count;
         }
 
-        public int AddActivity()
+        public Tuple<List<Models.Activities>, int> ListActivitiesByPage(int startPage, int pageSize)
         {
-            throw new NotImplementedException();
+            var activites = new List<Models.Activities>();
+            int count = -1;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("AcPage", connection) { CommandType = System.Data.CommandType.StoredProcedure })
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@startPage", startPage));
+                    command.Parameters.Add(new SqlParameter("@pageSize", pageSize));
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            if (count == -1)
+                            {
+                                count = (int)reader["ACsum"];
+                            }
+                            activites.Add(new Models.Activities
+                            {
+                                Id = (string)reader["Id"],
+                                AcName = (string)reader["Name"],
+                                EsFee = (int)reader["EsFee"],
+                                Descript = (string)reader["Descript"],
+                                StartDate = (DateTime)reader["StartTime"],
+                                EndDate = (DateTime)reader["EndTime"],
+                                EventId = (string)reader["EventId"],
+                                AcStatus = (byte)reader["Status"],
+                                Img = (string)reader["Imgs"],
+                                Detail = (string)reader["Detail"],
+                                Vision = (byte)reader["Vision"],
+                            });
+
+                        }
+                    }
+                }
+            }
+            return new Tuple<List<Activities>, int>(activites, count);
         }
     }
 }

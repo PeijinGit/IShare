@@ -12,5 +12,6 @@ namespace Business
         Models.Event UpdateEvent(Models.Event newEvent);
         Models.ResResult<Models.Activities> ListActivities();
         int AddActivity();
+        Models.AcPageResult ListActivitiesByPage(int startPage, int pageSize);
     }
 }

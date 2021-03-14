@@ -72,6 +72,26 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet]
+        public Models.ResResult<Models.AcPageResult> ListActivitiesByPage(int startPage, int pageSize)
+        {
+            Models.AcPageResult acPageResult = business.ListActivitiesByPage( startPage, pageSize);
+            if (acPageResult != null)
+            {
+                Models.ResResult<Models.AcPageResult> resResult = new Models.ResResult<Models.AcPageResult>();
+                resResult.Status = 1;
+                resResult.ResultData = new List<Models.AcPageResult>() { acPageResult };
+                resResult.Msg = "Request Success";
+
+                return resResult;
+            }
+            else 
+            {
+                return new Models.ResResult<Models.AcPageResult> { Status = -1, Msg = "Request Fail" };
+            }
+
+        }
+
         /// <summary>
         /// Temp function
         /// </summary>
@@ -83,8 +103,10 @@ namespace API.Controllers
         }
 
 
+
         public string Welcome() 
         {
+            //business.AddActivity();
             return "Program start Welcome!";
         }
     }
