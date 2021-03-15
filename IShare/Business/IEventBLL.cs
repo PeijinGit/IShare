@@ -13,5 +13,6 @@ namespace Business
         Models.ResResult<Models.Activities> ListActivities();
         int AddActivity();
         Models.AcPageResult ListActivitiesByPage(int startPage, int pageSize);
+        int UpdateAcStatus(string id, int status);
     }
 }

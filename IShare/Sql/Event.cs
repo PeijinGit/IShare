@@ -24,7 +24,6 @@ namespace DAL
         /// <returns></returns>
         public Models.Event AddEvent(int creatorId, string eventName)
         {
-            var events = new List<Models.Event>();
             using (var connection = new SqlConnection(connectionString))
             {
                 using (var command = new SqlCommand("AddEvents", connection) { CommandType = System.Data.CommandType.StoredProcedure })
@@ -245,6 +244,32 @@ namespace DAL
                 }
             }
             return new Tuple<List<Activities>, int>(activites, count);
+        }
+
+        public int UpdateAcStatus(string id, int status)
+        {
+            int count = -1;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("UpdateACStatus", connection) { CommandType = System.Data.CommandType.StoredProcedure })
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@id", id));
+                    command.Parameters.Add(new SqlParameter("@status", status));
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader == null)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            count = (int)reader["rowNum"];
+                            return count;
+                        }
+                    }
+                }
+            }
         }
     }
 }

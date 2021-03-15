@@ -85,5 +85,11 @@ namespace Business
                 return null;
             }
         }
+
+        public int UpdateAcStatus(string id, int status)
+        {
+            int newStatus = status == 0 ? 1 : 0;
+            return dal.UpdateAcStatus(id, status);
+        }
     }
 }

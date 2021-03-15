@@ -12,6 +12,7 @@ namespace DAL
         Models.Event UpdateEvent(string id, string eventName);
         IEnumerable<Models.Activities> ListActivities();
         int AddActivity(int i);
+        int UpdateAcStatus(string id,int status);
         Tuple<List<Models.Activities>, int> ListActivitiesByPage(int startPage,int pageSize);
     }
 }
