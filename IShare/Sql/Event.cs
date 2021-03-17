@@ -132,43 +132,6 @@ namespace DAL
             return events;
         }
 
-        /// <summary>
-        /// A temp function for listing all the acticities
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Models.Activities> ListActivities()
-        {
-            var activites = new List<Models.Activities>();
-            using (var connection = new SqlConnection(connectionString))
-            {
-                using (var command = new SqlCommand("SELECT * FROM Activities", connection) { CommandType = System.Data.CommandType.Text })
-                {
-                    connection.Open();
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            activites.Add(new Models.Activities
-                            {
-                                Id = (string)reader["Id"],
-                                AcName = (string)reader["Name"],
-                                EsFee = (int)reader["EsFee"],
-                                Descript = (string)reader["Descript"],
-                                StartDate = (DateTime)reader["StartTime"],
-                                EndDate = (DateTime)reader["EndTime"],
-                                EventId = (string)reader["EventId"],
-                                AcStatus = (byte)reader["Status"],
-                                Img = (string)reader["Imgs"],
-                                Detail = (string)reader["Detail"],
-                                Vision = (byte)reader["Vision"],
-                            });
-                        }
-                    }
-                }
-            }
-            return activites;
-        }
-
         public int AddActivity(int i)
         {
             string name = "";

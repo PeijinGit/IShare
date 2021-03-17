@@ -34,31 +34,6 @@ namespace Business
             return dal.UpdateEvent(newEvent.Id, newEvent.EventName);
         }
 
-        public Models.ResResult<Models.Activities> ListActivities()
-        {
-            var activities = dal.ListActivities();
-            if (activities != null)
-            {
-                return new Models.ResResult<Models.Activities> 
-                {   
-                    Status = 1, 
-                    ResultData = (List<Activities>)activities, 
-                    Msg = "Success" 
-                };
-            }
-            else 
-            {
-                return new Models.ResResult<Models.Activities> 
-                { 
-                    Status = -1, 
-                    ResultData = (List<Activities>)activities, 
-                    Msg = "Fail" 
-                };
-            }
-            
-        }
-
-
         public int AddActivity()
         {
             return dal.AddActivity(239);
@@ -88,7 +63,6 @@ namespace Business
 
         public int UpdateAcStatus(string id, int status)
         {
-            //int newStatus = status == 0 ? 1 : 0;
             return dal.UpdateAcStatus(id, status);
         }
     }
