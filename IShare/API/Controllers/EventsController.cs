@@ -100,9 +100,9 @@ namespace API.Controllers
 
 
         [HttpPost]
-        public Models.ResResult<int> UpdateAcStatus([FromForm] string id, [FromForm] int status) 
+        public Models.ResResult<int> UpdateAcStatus([FromForm] string id, [FromForm] int newStatus) 
         {
-            int upResult = business.UpdateAcStatus(id, status);
+            int upResult = business.UpdateAcStatus(id, newStatus);
             if (upResult > 0)
             {
                 return new Models.ResResult<int> { Status = 1, Msg = "Update Sucess" };

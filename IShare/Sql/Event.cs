@@ -264,7 +264,10 @@ namespace DAL
                         }
                         else
                         {
-                            count = (int)reader["rowNum"];
+                            while (reader.Read()) 
+                            {
+                                count = (int)reader["RowNum"];
+                            }
                             return count;
                         }
                     }
