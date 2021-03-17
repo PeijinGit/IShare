@@ -25,7 +25,6 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [TypeFilter(typeof(ISActionFitler))]
         public IEnumerable<Models.Event> ListEventsById(int id)
         {
 
@@ -33,7 +32,6 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [TypeFilter(typeof(ISActionFitler))]
         public Models.ResResult<Models.Event> AddEvent(Models.Event newEvent)
         {
             Models.Event resultEvent = business.AddEvent(newEvent);
@@ -53,9 +51,8 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [TypeFilter(typeof(ISActionFitler))]
         public Models.ResResult<Models.Event> UpdateEvent(Models.Event newEvent)
-        {
+         {
             Models.Event resutEvent = business.UpdateEvent(newEvent);
             if (resutEvent == null)
             {
@@ -72,6 +69,46 @@ namespace API.Controllers
             }
         }
 
+        /// <summary>
+        /// Activities pagenation function
+        /// </summary>
+        /// <param name="startPage">AKA current page</param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public Models.ResResult<Models.AcPageResult> ListActivitiesByPage(int startPage, int pageSize)
+        {
+            Models.AcPageResult acPageResult = business.ListActivitiesByPage( startPage, pageSize);
+            if (acPageResult != null)
+            {
+                Models.ResResult<Models.AcPageResult> resResult = new Models.ResResult<Models.AcPageResult>();
+                resResult.Status = 1;
+                resResult.ResultData = new List<Models.AcPageResult>() { acPageResult };
+                resResult.Msg = "Request Success";
+
+                return resResult;
+            }
+            else 
+            {
+                return new Models.ResResult<Models.AcPageResult> { Status = -1, Msg = "Request Fail" };
+            }
+
+        }
+
+
+        [HttpPost]
+        public Models.ResResult<int> UpdateAcStatus([FromForm] string id, [FromForm] int newStatus) 
+        {
+            int upResult = business.UpdateAcStatus(id, newStatus);
+            if (upResult > 0)
+            {
+                return new Models.ResResult<int> { Status = 1, Msg = "Update Sucess" };
+            }
+            else 
+            {
+                return new Models.ResResult<int> { Status = -1, Msg = "Update Fail" };
+            }
+        }
 
         public string Welcome() 
         {

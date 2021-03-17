@@ -1,4 +1,6 @@
 ﻿using DAL;
+using Models;
+using System;
 using System.Collections.Generic;
 
 namespace Business
@@ -30,6 +32,38 @@ namespace Business
         public Models.Event UpdateEvent(Models.Event newEvent)
         {
             return dal.UpdateEvent(newEvent.Id, newEvent.EventName);
+        }
+
+        public int AddActivity()
+        {
+            return dal.AddActivity(239);
+        }
+
+        public AcPageResult ListActivitiesByPage(int startPage, int pageSize)
+        {
+            var resutlt = dal.ListActivitiesByPage(startPage, pageSize);
+            int totalAc = resutlt.Item2;
+            if (totalAc != -1 ) 
+            {
+                int totalP = totalAc % pageSize == 0 ? totalAc / pageSize : totalAc / pageSize + 1;
+                return new AcPageResult 
+                        {
+                            PageNum=startPage, 
+                            totalNum = totalAc, 
+                            totalPages = totalP, 
+                            PageSize = pageSize, 
+                            Activities = resutlt.Item1
+                        };
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public int UpdateAcStatus(string id, int status)
+        {
+            return dal.UpdateAcStatus(id, status);
         }
     }
 }
