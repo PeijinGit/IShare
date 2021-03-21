@@ -209,6 +209,50 @@ namespace DAL
             return new Tuple<List<Activities>, int>(activites, count);
         }
 
+        public Tuple<List<Models.Activities>, int> SearchByCondition(int startPage, int pageSize,string keyWord, string proc)
+        {
+            var activites = new List<Models.Activities>();
+            int count = -1;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand(proc, connection) { CommandType = System.Data.CommandType.StoredProcedure })
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@condition", keyWord));
+                    command.Parameters.Add(new SqlParameter("@startPage", startPage));
+                    command.Parameters.Add(new SqlParameter("@pageSize", pageSize));
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            if (count == -1)
+                            {
+                                count = (int)reader["ACsum"];
+                            }
+                            activites.Add(new Models.Activities
+                            {
+                                Id = (string)reader["Id"],
+                                AcName = (string)reader["Name"],
+                                EsFee = (int)reader["EsFee"],
+                                Descript = (string)reader["Descript"],
+                                StartDate = (DateTime)reader["StartTime"],
+                                EndDate = (DateTime)reader["EndTime"],
+                                EventId = (string)reader["EventId"],
+                                AcStatus = (byte)reader["Status"],
+                                Img = (string)reader["Imgs"],
+                                Detail = (string)reader["Detail"],
+                                Vision = (byte)reader["Vision"],
+                            });
+
+                        }
+                    }
+                }
+            }
+            return new Tuple<List<Activities>, int>(activites, count);
+        }
+
         public int UpdateAcStatus(string id, int status)
         {
             int count = -1;

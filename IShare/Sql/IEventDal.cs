@@ -13,5 +13,6 @@ namespace DAL
         int AddActivity(int i);
         int UpdateAcStatus(string id,int status);
         Tuple<List<Models.Activities>, int> ListActivitiesByPage(int startPage,int pageSize);
+        Tuple<List<Models.Activities>, int> SearchByCondition(int startPage, int pageSize, string keyWord, string proc);
     }
 }

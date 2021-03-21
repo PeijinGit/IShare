@@ -95,6 +95,32 @@ namespace API.Controllers
 
         }
 
+        /// <summary>
+        /// Activities pagenation function
+        /// </summary>
+        /// <param name="startPage">AKA current page</param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public Models.ResResult<Models.AcPageResult> SearchByCondition(int startPage, int pageSize,string keyWord, string criteria)
+        {
+            Models.AcPageResult acPageResult = business.SearchByCondition(startPage, pageSize, keyWord, criteria);
+            if (acPageResult != null)
+            {
+                Models.ResResult<Models.AcPageResult> resResult = new Models.ResResult<Models.AcPageResult>();
+                resResult.Status = 1;
+                resResult.ResultData = new List<Models.AcPageResult>() { acPageResult };
+                resResult.Msg = "Request Success";
+
+                return resResult;
+            }
+            else
+            {
+                return new Models.ResResult<Models.AcPageResult> { Status = -1, Msg = "Request Fail" };
+            }
+
+        }
+
 
         [HttpPost]
         public Models.ResResult<int> UpdateAcStatus([FromForm] string id, [FromForm] int newStatus) 

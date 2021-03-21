@@ -12,6 +12,7 @@ namespace Business
         Models.Event UpdateEvent(Models.Event newEvent);
         int AddActivity();
         Models.AcPageResult ListActivitiesByPage(int startPage, int pageSize);
+        Models.AcPageResult SearchByCondition(int startPage, int pageSize, string keyWord, string proc);
         int UpdateAcStatus(string id, int status);
     }
 }
