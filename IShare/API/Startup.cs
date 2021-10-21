@@ -37,6 +37,7 @@ namespace API
             services.AddScoped(typeof(IUserBLL), typeof(Business.User));
             services.AddScoped(typeof(IUserDAL), typeof(DAL.User));
             services.AddScoped(typeof(IUserBLL), typeof(Business.User));
+
             services.AddControllers();
         }
 
