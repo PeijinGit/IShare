@@ -35,6 +35,8 @@ namespace API
             services.AddScoped(typeof(IEventBLL), typeof(Business.Event));
             services.AddScoped(typeof(IUserDAL), typeof(DAL.User));
             services.AddScoped(typeof(IUserBLL), typeof(Business.User));
+            services.AddScoped(typeof(IEventDAL), typeof(DAL.Event));
+            services.AddScoped(typeof(IEventBLL), typeof(Business.Event));
             services.AddControllers();
         }
 
