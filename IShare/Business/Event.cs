@@ -65,5 +65,30 @@ namespace Business
         {
             return dal.UpdateAcStatus(id, status);
         }
+
+        public AcPageResult SearchByCondition(int startPage, int pageSize, string keyWord, string criteria)
+        {
+            string proc = criteria == "productName" ? "SearchAcByName" : "SearchAcByDesc";
+            string NkeyWord = string.Format("%{0}%", keyWord);
+
+            var result = dal.SearchByCondition(startPage, pageSize, NkeyWord, proc);
+            int totalAc = result.Item2;
+            if (totalAc != -1)
+            {
+                int totalP = totalAc % pageSize == 0 ? totalAc / pageSize : totalAc / pageSize + 1;
+                return new AcPageResult
+                {
+                    PageNum = startPage,
+                    totalNum = totalAc,
+                    totalPages = totalP,
+                    PageSize = pageSize,
+                    Activities = result.Item1
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

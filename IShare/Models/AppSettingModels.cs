@@ -8,4 +8,5 @@ namespace Models
     {
         public string ConStr { get; set; }
     }
+
 }
