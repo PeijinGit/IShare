@@ -22,7 +22,11 @@ namespace API.Controllers
         {
             this.userBLL = userBLL;
         }
-
+        [HttpGet]
+        public string Welcome( )
+        {
+            return "UserController start Welcome!";
+        }
 
         [HttpPost]
         public Models.LoginResponse ValidateLogin(Models.User user) 

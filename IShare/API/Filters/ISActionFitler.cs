@@ -12,7 +12,7 @@ namespace API.Filters
     /// Acquire token in request headers and check whether login exceed expire time 60mins
     /// </summary>
     public class ISActionFitler : ActionFilterAttribute
-    {
+    { 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (context.HttpContext.Request.Headers.ContainsKey("Authorization"))

@@ -14,7 +14,6 @@ namespace DAL
         public Event(IOptions<AppSettingModels> appSettings) : base(appSettings)
         {
         }
-
         /// <summary>
         /// Add event function
         /// Insert single event with eventId CreatorId and eventName 
